@@ -13,8 +13,8 @@ app.get("/",(req,res)=>{
 })
 app.post("/newData",(req,res)=>{
 	/*console.log(req.body)*/
-	const {name,age}=req.body
-	console.log("name and age is",name,age)
+	const {name,age,number,email,date,gender,course}=req.body
+	console.log(name,age,number,email,date,gender,course)
 	res.send("Added successfully")
 })
 app.listen(port,()=>console.log("server is started"))

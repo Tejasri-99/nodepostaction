@@ -7,7 +7,7 @@
 	<style type="text/css">
 		*{
 			margin: 0%;
-			padding: 0.7%;
+			padding: 0.9%;
 			 font-size: 1rem;
 			 font-style: italic;
 			 font-weight: bold;
@@ -16,19 +16,22 @@
 			 text-color: pink;
 		}
 		body{ 
-		background-image: url(https://c4.wallpaperflare.com/wallpaper/522/382/338/paint-unevenness-watercolor-pink-wallpaper-preview.jpg);
+		background-image: url(https://previews.123rf.com/images/mihsan23th/mihsan23th2005/mihsan23th200500041/147561233-beautiful-wallpaper-hd-splash-watercolor-multicolor-blue-pink-pastel-color-abstract-texture-backgrou.jpg);
 			text-align: center;
-			margin-top: 10%;
+			margin-top: 7%;
 			background-repeat: no-repeat;
 			background-size: 100%;
-			
+		
 		 }
 		 .submit{
 		 	background-color: blue;
 		 	color: white;
 		 	width: 10%;
 		 }
-		 
+		 #course{ 
+		 		width: 20%;
+
+		  }
 	</style>
 	<script type="text/javascript">
 	function demo(){
@@ -38,12 +41,43 @@
 		var password=document.getElementById("password").value
 		console.log(password)
 		document.getElementById("password").value=""
+		var newcourse=document.getElementById("course").value
+		console.log(newcourse)
+		document.getElementById("course").value=""
+		var number=document.getElementById("number").value
+		var numbercheck=/^[0-9]{10}$/
+		if(!number.match(numbercheck)){
+			alert("number must contain 10 digits")
+			return false
+		}
+		console.log(number)	
+		document.getElementById("number").value=""
+		var date=document.getElementById("date").value
+		console.log(date)
+		document.getElementById("date").value=""
+		var email=document.getElementById("email").value
+		var emailCheck=/^[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}$/
+		if(email==""){
+			alert("Please Enter Email")
+			return false
+		}
+		if(!email.match(emailCheck)){
+			alert("Invalid email")
+			return false
+		}
+		console.log(email)
+		document.getElementById("email").value=""
+		var gmale=document.getElementById("male").checked
+		var gfemale=document.getElementById("female").checked
+		console.log(gmale,gfemale)
+		if(gmale==true) var gender="Male"
+			else var gender="Female" 
 		fetch("http://localhost:2003/newData",{
 		method:"POST",
 		headers:{
 			"Content-Type":"application/json"
 		},
-		body:JSON.stringify({name:newname,age:password})
+		body:JSON.stringify({name:newname,age:password,course:newcourse,number:number,date:date,email:email,      gender:gender})
 	})
 		.then((res)=>{
 			console.log(res)
@@ -59,6 +93,19 @@
 <body>
 	<p><input type="text" placeholder="Enter your Name" id="name"></p>
 	<p><input type="password" placeholder="password" id="password"></p>
+	<p><input type="number" placeholder="Enter Your MobileNumber" id="number"></p>
+	<p><input type="email" placeholder="Enter your emailaddress" id="email"></p>
+	<p><input type="date" id="date"></p>
+	<p>
+		<input type="radio" id="male"  name="gender">Male
+		<input type="radio" id="female"  name="gender">Female
+	</p>
+	<p><select id="course">
+		<option value="select a course">select a course</option>
+		<option value="MPCS">B.Sc</option>
+		<option value="BBA">BBA</option>
+		<option value="Bcom">Bcom</option>
+	</select></p>
 	<button onclick="demo()" class="submit">Submit</button>
 </body>
 </html>
